@@ -1,5 +1,8 @@
+#include <my_global.h>
+#include <mysql.h>
 #include <gtk/gtk.h>
 #include <string.h>
+#include "sql_util.h"
 
 int main(int argc, char *argv[])
 {
@@ -58,6 +61,7 @@ void on_run_button_clicked(GtkWidget *button, gpointer user_data)
 
     gtk_text_buffer_get_bounds (buffer, &start, &end);
     text = gtk_text_buffer_get_text (buffer, &start, &end, FALSE);
-    printf("%s\n", text);
+    /* execute query */
+    query("localhost", "test_user", "test_pass", "testdb", text);
     g_free(text);
 }
