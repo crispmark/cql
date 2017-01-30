@@ -91,7 +91,13 @@ void query(char *host, char *user, char *pass, char *db, char *query_string)
         }
         strcpy(result, prefix);
         strcat(result, db);
-        connection_query(con, result);
+
+        if (mysql_query(con, result))
+        {
+            free(result);
+            fprintf(stderr, "%s\n", mysql_error(con));
+            return;
+        }
         free(result);
     }
     connection_query(con, query_string);
