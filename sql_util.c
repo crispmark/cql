@@ -14,7 +14,7 @@ MYSQL *init_connection(char *host, char *user, char *pass)
     {
         fprintf(stderr, "%s\n", mysql_error(con));
         mysql_close(con);
-        con == NULL;
+        con = NULL;
         return con;
     }
     return con;
@@ -44,7 +44,7 @@ void connection_query(MYSQL *con, char *query_string)
                 {
                     if (i == 0)
                     {
-                        while (field = mysql_fetch_field(result))
+                        while ((field = mysql_fetch_field(result)))
                         {
                             printf("%s\t", field->name);
                         }
